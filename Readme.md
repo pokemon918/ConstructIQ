@@ -44,8 +44,10 @@ ConstructIQ/
 │   ├── test_services.py
 │   └── test_utils.py
 ├── scripts/              # Utility scripts
-│   ├── setup_db.py       # Database setup
-│   └── load_data.py      # Data loading script
+│   ├── load_data.py      # Data loading script
+│   ├── process_data.py   # Data processing script
+│   ├── create_embeddings.py # Embedding and indexing pipeline
+│   └── example_usage.py  # Example usage demonstration
 ├── docs/                 # Documentation
 │   └── api.md           # API documentation
 ├── .env.example         # Environment variables template
@@ -60,7 +62,7 @@ ConstructIQ/
 ### Prerequisites
 - Python 3.9+
 - OpenAI API key
-- Vector database (Chroma, Pinecone, or pgvector)
+- Pinecone API key and environment
 
 ### Installation
 
@@ -79,10 +81,16 @@ cp .env.example .env
 # Edit .env with your API keys and configuration
 ```
 
-3. **Setup database and load data:**
+3. **Load and process data:**
 ```bash
-python scripts/setup_db.py
+# Load raw data from Austin API
 python scripts/load_data.py
+
+# Process and normalize data
+python scripts/process_data.py
+
+# Create embeddings and index in Pinecone
+python scripts/create_embeddings.py
 ```
 
 4. **Run the application:**
@@ -101,34 +109,73 @@ The normalized permit schema groups fields logically:
 
 ```json
 {
-  "permit_id": "string",
-  "basic_info": {
+  "metadata": {
+    "record_id": "string",
+    "validation_status": "string"
+  },
+  "permit_info": {
+    "permit_number": "string",
     "permit_type": "string",
+    "permit_type_description": "string",
+    "permit_class": "string",
     "work_class": "string",
-    "description": "string",
-    "status": "string"
+    "status": "string",
+    "description": "string"
   },
   "location": {
     "address": "string",
     "city": "string",
     "state": "string",
-    "zip_code": "string"
+    "zip_code": "string",
+    "latitude": "float",
+    "longitude": "float",
+    "council_district": "string"
   },
-  "timeline": {
-    "date_issued": "date",
-    "calendar_year_issued": "integer",
-    "expiration_date": "date"
+  "dates": {
+    "applied_date": "string",
+    "issue_date": "string",
+    "calendar_year": "string",
+    "expires_date": "string"
+  },
+  "project": {
+    "project_id": "string",
+    "master_permit_number": "string"
   },
   "valuation": {
-    "total_value": "decimal",
-    "fee": "decimal"
+    "total_job_valuation": "float",
+    "total_new_addition_sqft": "float",
+    "total_existing_building_sqft": "float"
   },
   "contractor": {
-    "contractor_name": "string",
-    "contractor_license": "string"
+    "contractor_company_name": "string",
+    "contractor_trade": "string",
+    "contractor_full_name": "string"
+  },
+  "applicant": {
+    "applicant_full_name": "string",
+    "applicant_organization": "string"
   }
 }
 ```
+
+## 🔍 Embedding and Vector Search
+
+The system uses OpenAI's `text-embedding-3-small` model to create semantic embeddings from permit records. Text blocks are constructed from relevant fields:
+
+- **Description**: Permit description and work details
+- **Permit Type**: Type and classification information
+- **Work Class**: Specific work category
+- **Location**: Address and geographic information
+- **Contractor**: Contractor company and trade information
+- **Applicant**: Applicant name and organization
+- **Valuation**: Project value and square footage
+
+### Search Capabilities
+
+- **Semantic Search**: Find permits by natural language queries
+- **Filtered Search**: Combine semantic search with metadata filters
+- **Vector Similarity**: Direct vector similarity search
+- **Metadata Filtering**: Filter by permit type, location, dates, valuation, etc.
 
 ## 🔍 API Endpoints
 
@@ -169,6 +216,28 @@ Interactive API documentation (Swagger UI).
 
 ## 🛠️ Development
 
+### Running the Embedding Pipeline
+
+1. **Load raw data:**
+```bash
+python scripts/load_data.py
+```
+
+2. **Process and normalize data:**
+```bash
+python scripts/process_data.py
+```
+
+3. **Create embeddings and index:**
+```bash
+python scripts/create_embeddings.py --raw-data data/raw/austin_permits.json --index-name austin-permits-v1
+```
+
+4. **Test search functionality:**
+```bash
+python scripts/example_usage.py
+```
+
 ### Running Tests
 ```bash
 pytest tests/
@@ -195,7 +264,8 @@ docker run -p 8000:8000 constructiq-api
 
 ### Environment Variables
 - `OPENAI_API_KEY`: Your OpenAI API key
-- `VECTOR_DB_URL`: Vector database connection string
+- `PINECONE_API_KEY`: Your Pinecone API key
+- `PINECONE_ENVIRONMENT`: Your Pinecone environment (e.g., "us-east-1-aws")
 - `LOG_LEVEL`: Logging level (DEBUG, INFO, WARNING, ERROR)
 
 ## 📝 Logging
