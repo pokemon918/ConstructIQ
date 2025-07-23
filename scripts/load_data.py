@@ -110,7 +110,6 @@ def main():
         limit = int(os.getenv("LIMIT", "10"))
         offset = int(os.getenv("OFFSET", "0"))
         
-        # Load data with the specified parameters
         filepath = loader.load_and_save(limit=limit, offset=offset)
         
         print(f"\n✅ Data successfully loaded and saved to: {filepath}")
@@ -121,7 +120,6 @@ def main():
         
         print(f"📊 Total records: {len(data)}")
         
-        # Show field information
         if data:
             print(f"📋 Total fields per record: {len(data[0])}")
         
