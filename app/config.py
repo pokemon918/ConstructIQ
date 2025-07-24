@@ -1,7 +1,6 @@
 from typing import Optional
 from pydantic_settings import BaseSettings
 
-
 class Settings(BaseSettings):    
     # API Configuration
     api_title: str = "ConstructIQ Permit Search API"

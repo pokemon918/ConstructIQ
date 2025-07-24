@@ -18,7 +18,6 @@ permit_service = None
 
 
 def create_app() -> FastAPI:
-    """Create and configure the FastAPI application."""
     app = FastAPI(
         title=settings.api_title,
         description=settings.api_description,
@@ -42,8 +41,6 @@ def create_app() -> FastAPI:
     
     return app
 
-
-# Create the application instance
 app = create_app()
 
 
@@ -64,7 +61,6 @@ async def startup_event():
 
 @app.on_event("shutdown")
 async def shutdown_event():
-    """Cleanup on application shutdown."""
     logger.info("Application shutting down...")
 
 
