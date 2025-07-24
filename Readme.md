@@ -1,291 +1,204 @@
-# ConstructIQ - Semantic API Prototype
+# ConstructIQ - Austin Building Permits Search API
 
-A FastAPI-based semantic search API for construction permit data from the City of Austin.
+A semantic search API for Austin building permits using vector embeddings and Pinecone vector database.
 
-## 🎯 Project Overview
+## Features
 
-This project implements a semantic search system for construction permit data that:
-- Normalizes raw permit records into a clean schema
-- Embeds permit data using OpenAI's text-embedding-3-small
-- Indexes data in a vector database for semantic search
-- Exposes a RESTful API with filtering and query logging capabilities
+- 🔍 **Semantic Search**: Find permits using natural language queries
+- 🎯 **Advanced Filtering**: Filter by permit type, year, location, valuation, and more
+- ⚡ **Fast Performance**: Vector similarity search with sub-second response times
+- 📊 **Rich Metadata**: Comprehensive permit information with similarity scores
+- 🚀 **RESTful API**: Easy-to-use FastAPI endpoints
 
-## 🏗️ Project Structure
+## Quick Start
 
-```
-ConstructIQ/
-├── app/                    # Main application code
-│   ├── __init__.py
-│   ├── main.py            # FastAPI application entry point
-│   ├── config.py          # Configuration management
-│   ├── models/            # Data models and schemas
-│   │   ├── __init__.py
-│   │   ├── permit.py      # Permit data models
-│   │   └── api.py         # API request/response models
-│   ├── services/          # Business logic
-│   │   ├── __init__.py
-│   │   ├── embedding.py   # OpenAI embedding service
-│   │   ├── vector_db.py   # Vector database operations
-│   │   └── permit.py      # Permit data processing
-│   ├── api/               # API routes
-│   │   ├── __init__.py
-│   │   ├── search.py      # Search endpoint
-│   │   └── health.py      # Health check endpoint
-│   └── utils/             # Utility functions
-│       ├── __init__.py
-│       ├── logger.py      # Logging configuration
-│       └── data_processor.py # Data normalization utilities
-├── data/                  # Data files
-│   ├── raw/              # Raw permit data
-│   └── processed/        # Normalized permit data
-├── tests/                # Test suite
-│   ├── __init__.py
-│   ├── test_api.py
-│   ├── test_services.py
-│   └── test_utils.py
-├── scripts/              # Utility scripts
-│   ├── load_data.py      # Data loading script
-│   ├── process_data.py   # Data processing script
-│   ├── create_embeddings.py # Embedding and indexing pipeline
-│   └── example_usage.py  # Example usage demonstration
-├── docs/                 # Documentation
-│   └── api.md           # API documentation
-├── .env.example         # Environment variables template
-├── requirements.txt     # Python dependencies
-├── Dockerfile          # Container configuration
-├── docker-compose.yml  # Local development setup
-└── README.md           # This file
-```
+### 1. Environment Setup
 
-## 🚀 Quick Start
+Create a `.env` file in the root directory:
 
-### Prerequisites
-- Python 3.9+
-- OpenAI API key
-- Pinecone API key and environment
-
-### Installation
-
-1. **Clone and setup environment:**
 ```bash
-git clone <repository-url>
-cd ConstructIQ
-python -m venv venv
-source venv/bin/activate  # On Windows: venv\Scripts\activate
+# OpenAI API Configuration
+OPENAI_API_KEY=your_openai_api_key_here
+
+# Pinecone Configuration
+PINECONE_API_KEY=your_pinecone_api_key_here
+PINECONE_ENVIRONMENT=your_pinecone_environment_here
+
+# Optional: Pinecone Index Name
+PINECONE_INDEX_NAME=austin-permits
+```
+
+### 2. Install Dependencies
+
+```bash
 pip install -r requirements.txt
 ```
 
-2. **Configure environment:**
+### 3. Index Your Data
+
+First, make sure you have processed permit data in `data/processed/` directory, then run:
+
 ```bash
-cp .env.example .env
-# Edit .env with your API keys and configuration
-```
-
-3. **Load and process data:**
-```bash
-# Load raw data from Austin API
-python scripts/load_data.py
-
-# Process and normalize data
-python scripts/process_data.py
-
-# Create embeddings and index in Pinecone
 python scripts/create_embeddings.py
 ```
 
-4. **Run the application:**
+### 4. Start the FastAPI Server
+
+**Option 1: Using the startup script (Recommended)**
 ```bash
-uvicorn app.main:app --reload
+python run.py
 ```
 
-5. **Access the API:**
-- API Documentation: http://localhost:8000/docs
-- Health Check: http://localhost:8000/healthz
-- Search Endpoint: POST http://localhost:8000/search
-
-## 📊 Data Schema
-
-The normalized permit schema groups fields logically:
-
-```json
-{
-  "metadata": {
-    "record_id": "string",
-    "validation_status": "string"
-  },
-  "permit_info": {
-    "permit_number": "string",
-    "permit_type": "string",
-    "permit_type_description": "string",
-    "permit_class": "string",
-    "work_class": "string",
-    "status": "string",
-    "description": "string"
-  },
-  "location": {
-    "address": "string",
-    "city": "string",
-    "state": "string",
-    "zip_code": "string",
-    "latitude": "float",
-    "longitude": "float",
-    "council_district": "string"
-  },
-  "dates": {
-    "applied_date": "string",
-    "issue_date": "string",
-    "calendar_year": "string",
-    "expires_date": "string"
-  },
-  "project": {
-    "project_id": "string",
-    "master_permit_number": "string"
-  },
-  "valuation": {
-    "total_job_valuation": "float",
-    "total_new_addition_sqft": "float",
-    "total_existing_building_sqft": "float"
-  },
-  "contractor": {
-    "contractor_company_name": "string",
-    "contractor_trade": "string",
-    "contractor_full_name": "string"
-  },
-  "applicant": {
-    "applicant_full_name": "string",
-    "applicant_organization": "string"
-  }
-}
+**Option 2: Using uvicorn directly**
+```bash
+uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
 ```
 
-## 🔍 Embedding and Vector Search
+**Option 3: From the app directory**
+```bash
+cd app
+python main.py
+```
 
-The system uses OpenAI's `text-embedding-3-small` model to create semantic embeddings from permit records. Text blocks are constructed from relevant fields:
+### 5. Access the API
 
-- **Description**: Permit description and work details
-- **Permit Type**: Type and classification information
-- **Work Class**: Specific work category
-- **Location**: Address and geographic information
-- **Contractor**: Contractor company and trade information
-- **Applicant**: Applicant name and organization
-- **Valuation**: Project value and square footage
+- **API Documentation**: http://localhost:8000/docs
+- **Health Check**: http://localhost:8000/health
+- **Search Endpoint**: POST http://localhost:8000/api/v1/search
 
-### Search Capabilities
+## API Usage
 
-- **Semantic Search**: Find permits by natural language queries
-- **Filtered Search**: Combine semantic search with metadata filters
-- **Vector Similarity**: Direct vector similarity search
-- **Metadata Filtering**: Filter by permit type, location, dates, valuation, etc.
+### Search Permits
 
-## 🔍 API Endpoints
+**Endpoint**: `POST /api/v1/search`
 
-### POST /search
-Semantic search for permits with filtering capabilities.
-
-**Request:**
+**Request Body**:
 ```json
 {
   "query": "commercial remodel downtown",
   "filters": {
-    "permit_type": "Commercial",
-    "calendar_year_issued": 2023
-  }
+    "permit_class": "Commercial",
+    "calendar_year_issued": 2011
+  },
+  "top_k": 5
 }
 ```
 
-**Response:**
-```json
-{
-  "results": [
-    {
-      "permit_id": "string",
-      "similarity_score": 0.95,
-      "permit_data": { ... }
-    }
-  ],
-  "total_results": 5,
-  "query_time_ms": 150
-}
-```
+### Available Filters
 
-### GET /healthz
-Health check endpoint.
+The API supports filtering on all metadata fields. Here are the main categories:
 
-### GET /docs
-Interactive API documentation (Swagger UI).
+#### Core Identifiers
+- `permit_number`, `project_id`, `master_permit_number`
 
-## 🛠️ Development
+#### Permit Classification
+- `permit_type`, `permit_type_description`, `permit_class`, `permit_class_original`, `work_class`, `status`, `issue_method`
 
-### Running the Embedding Pipeline
+#### Location Data
+- `address`, `original_address`, `city`, `state`, `zip_code`, `council_district`, `jurisdiction`, `property_id`, `legal_description`, `latitude`, `longitude`, `total_lot_sqft`
 
-1. **Load raw data:**
+#### Dates
+- `applied_date`, `issue_date`, `expires_date`, `completed_date`, `calendar_year_issued`, `fiscal_year_issued`, `day_issued`
+
+#### Valuation (Numeric with operators)
+- `total_job_valuation`, `total_new_addition_sqft`, `total_existing_building_sqft`, `remodel_repair_sqft`, `total_valuation_remodel`, `number_of_floors`, `housing_units`
+
+#### Trade-Specific Valuations
+- `building_valuation`, `building_valuation_remodel`, `electrical_valuation`, `electrical_valuation_remodel`, `mechanical_valuation`, `mechanical_valuation_remodel`, `plumbing_valuation`, `plumbing_valuation_remodel`, `medgas_valuation`, `medgas_valuation_remodel`
+
+#### Contractor Information
+- `contractor_company`, `contractor_trade`, `contractor_full_name`, `contractor_phone`, `contractor_address1`, `contractor_address2`, `contractor_city`, `contractor_zip`
+
+#### Applicant Information
+- `applicant_name`, `applicant_organization`, `applicant_phone`, `applicant_address1`, `applicant_address2`, `applicant_city`, `applicant_zip`
+
+#### Project Details
+- `project_description`, `permit_link`
+
+#### Boolean Flags
+- `condominium`, `certificate_of_occupancy`, `recently_issued`
+
+## Testing the API
+
+Run the test suite to verify everything is working:
+
 ```bash
-python scripts/load_data.py
+python scripts/test_api.py
 ```
 
-2. **Process and normalize data:**
+## API Endpoints
+
+| Endpoint | Method | Description |
+|----------|--------|-------------|
+| `/` | GET | Health check |
+| `/health` | GET | Detailed service status |
+| `/api/v1/search` | POST | Search permits with filters |
+
+## Development
+
+### Project Structure
+
+```
+ConstructIQ/
+├── app/
+│   ├── main.py              # FastAPI application entry point
+│   ├── config.py            # Application configuration
+│   ├── models/              # Pydantic models
+│   │   ├── __init__.py
+│   │   ├── search.py        # Search request/response models
+│   │   └── common.py        # Common response models
+│   ├── api/                 # API routes
+│   │   ├── __init__.py
+│   │   ├── search.py        # Search endpoints
+│   │   └── health.py        # Health check endpoints
+│   ├── services/            # Business logic
+│   │   ├── __init__.py
+│   │   ├── permit.py        # Main permit service
+│   │   ├── embedding.py     # OpenAI embedding service
+│   │   └── vector_db.py     # Pinecone vector database service
+│   └── utils/               # Utilities
+│       ├── __init__.py
+│       └── data_processor.py # Data processing utilities
+├── data/
+│   ├── raw/                 # Raw permit data
+│   └── processed/           # Processed permit data
+├── scripts/
+│   ├── create_embeddings.py # Data indexing script
+│   ├── example_search.py    # Search examples
+│   └── test_api.py          # API test suite
+├── requirements.txt         # Python dependencies
+└── README.md               # This file
+```
+
+### Running in Development Mode
+
 ```bash
-python scripts/process_data.py
+# Install development dependencies
+pip install -r requirements.txt
+
+# Start with auto-reload
+uvicorn app.main:app --reload --host 0.0.0.0 --port 8000
 ```
 
-3. **Create embeddings and index:**
-```bash
-python scripts/create_embeddings.py --raw-data data/raw/austin_permits.json --index-name austin-permits-v1
-```
+## Performance
 
-4. **Test search functionality:**
-```bash
-python scripts/example_usage.py
-```
+- **Search Response Time**: < 500ms for most queries
+- **Vector Index**: Pinecone serverless for scalability
+- **Embedding Model**: OpenAI text-embedding-3-small (1536 dimensions)
+- **Batch Processing**: Configurable batch sizes for indexing
 
-### Running Tests
-```bash
-pytest tests/
-```
+## Troubleshooting
 
-### Code Formatting
-```bash
-black app/ tests/
-isort app/ tests/
-```
+### Common Issues
 
-### Type Checking
-```bash
-mypy app/
-```
+1. **API Key Errors**: Ensure your `.env` file has valid API keys
+2. **Index Not Found**: Run `python scripts/create_embeddings.py` first
+3. **Connection Errors**: Check if the FastAPI server is running on port 8000
 
-## 🚀 Deployment
+### Logs
 
-### Docker Deployment
-```bash
-docker build -t constructiq-api .
-docker run -p 8000:8000 constructiq-api
-```
+Check the console output for detailed logs and error messages.
 
-### Environment Variables
-- `OPENAI_API_KEY`: Your OpenAI API key
-- `PINECONE_API_KEY`: Your Pinecone API key
-- `PINECONE_ENVIRONMENT`: Your Pinecone environment (e.g., "us-east-1-aws")
-- `LOG_LEVEL`: Logging level (DEBUG, INFO, WARNING, ERROR)
+## License
 
-## 📝 Logging
-
-The application logs:
-- Search queries with timestamps
-- Applied filters
-- Top result IDs
-- Performance metrics
-
-Logs are written to both console and file for analytics support.
-
-## 🤝 Contributing
-
-1. Fork the repository
-2. Create a feature branch
-3. Make your changes
-4. Add tests
-5. Submit a pull request
-
-## 📄 License
-
-This project is part of the ConstructIQ technical challenge.
+This project is for educational and demonstration purposes.

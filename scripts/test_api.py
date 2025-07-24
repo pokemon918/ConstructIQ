@@ -6,7 +6,6 @@ from typing import Dict, Any
 API_BASE_URL = "http://localhost:8000/api/v1"
 
 def test_api_health():
-    """Test the API health endpoint."""
     print("🔍 Testing API Health...")
     try:
         response = requests.get("http://localhost:8000/health")

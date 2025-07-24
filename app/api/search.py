@@ -46,32 +46,28 @@ async def search_permits(
         for result in results:
             metadata = result.metadata
             
-            search_result = SearchResult(
-                record_id=metadata.get('record_id', ''),
-                similarity_score=result.score,
-                permit_number=metadata.get('permit_number'),
-                permit_type=metadata.get('permit_type'),
-                permit_class=metadata.get('permit_class'),
-                work_class=metadata.get('work_class'),
-                status=metadata.get('status'),
-                address=metadata.get('address'),
-                city=metadata.get('city'),
-                state=metadata.get('state'),
-                zip_code=metadata.get('zip_code'),
-                calendar_year_issued=metadata.get('calendar_year_issued'),
-                total_job_valuation=metadata.get('total_job_valuation'),
-                contractor_company=metadata.get('contractor_company'),
-                contractor_trade=metadata.get('contractor_trade'),
-                project_description=metadata.get('project_description'),
-                text_block=metadata.get('text_block')
-            )
+            # Filter out null values from metadata
+            filtered_metadata = {k: v for k, v in metadata.items() if v is not None}
+            
+            # Create SearchResult with only non-null metadata fields
+            search_result_data = {
+                'record_id': filtered_metadata.get('record_id', ''),
+                'similarity_score': result.score,
+            }
+            
+            # Add all non-null metadata fields dynamically
+            for key, value in filtered_metadata.items():
+                if key != 'record_id':  # Already added above
+                    search_result_data[key] = value
+            
+            # Create SearchResult object with only the fields that have values
+            search_result = SearchResult(**search_result_data)
             search_results.append(search_result)
         
         search_time = (time.time() - start_time) * 1000
         
         return SearchResponse(
             query=request.query,
-            filters=request.filters,
             results=search_results,
             total_results=len(search_results),
             search_time_ms=round(search_time, 2)
