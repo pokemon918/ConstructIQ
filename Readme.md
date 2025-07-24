@@ -26,6 +26,10 @@ PINECONE_ENVIRONMENT=your_pinecone_environment_here
 
 # Optional: Pinecone Index Name
 PINECONE_INDEX_NAME=austin-permits
+
+DATASET_API_URL=https://data.austintexas.gov/resource/3syk-w9eu.csv
+LIMIT=10
+OFFSET=1000
 ```
 
 ### 2. Install Dependencies
@@ -198,7 +202,3 @@ uvicorn app.main:app --reload --host 0.0.0.0 --port 8000
 ### Logs
 
 Check the console output for detailed logs and error messages.
-
-## License
-
-This project is for educational and demonstration purposes.
