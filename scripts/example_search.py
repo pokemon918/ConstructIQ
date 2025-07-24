@@ -22,40 +22,53 @@ def main():
     print("Initializing permit service...")
     permit_service = PermitService()
     
-    # Check service status
-    print("\nChecking service status...")
-    status = permit_service.get_service_status()
-
-    print(status)
+    print("\n" + "="*60)
+    print("EXAMPLE SEARCHES WITH FILTERS")
+    print("="*60)
     
-    print("\n" + "="*50)
-    print("EXAMPLE SEARCHES")
-    print("="*50)
-    
-    search_queries = [
-        "residential construction"
+    # Define search examples with filters
+    search_examples = [
+        {
+            "query": "commercial remodel downtown",
+            "filters": {
+                "permit_class": "Commercial",
+                "calendar_year_issued":2011
+            }
+        }
     ]
     
-    for query in search_queries:
-        print(f"\nSearching for: '{query}'")
+    for example in search_examples:
+        print(f"\n{'='*50}")
+        print(f"{'='*50}")
+        print(f"Query: '{example['query']}'")
+        print(f"Filters: {json.dumps(example['filters'], indent=2)}")
+        
         try:
             results = permit_service.search_permits(
-                query_text=query,
+                query_text=example['query'],
                 top_k=5,
-                index_name="austin-permits"
+                index_name="austin-permits",
+                filter_dict=example['filters']
             )
             
-            print(f"Found {len(results)} results:")
+            print(f"\nFound {len(results)} results:")
             for i, result in enumerate(results, 1):
                 metadata = result.metadata
-                print(f"  {i}. Score: {result.score:.3f}")
-                print(f"     Permit: {metadata.get('permit_number', 'N/A')}")
-                print(f"     Type: {metadata.get('permit_type', 'N/A')}")
-                print(f"     Address: {metadata.get('city', 'N/A')}")
-                print()
+                print(f"\n  {i}. Score: {result.score:.3f}")
+                print(f"     metadata: {metadata}")
                 
         except Exception as e:
             print(f"Search failed: {e}")
+    
+    print(f"\n{'='*60}")
+    print("SAMPLE FILTERS AVAILABLE")
+    print("="*60)
+    
+    # Show available sample filters
+    # sample_filters = permit_service.create_sample_filters()
+    # for filter_name, filter_dict in sample_filters.items():
+    #     print(f"\n{filter_name}:")
+    #     print(f"  {json.dumps(filter_dict, indent=2)}")
 
 if __name__ == "__main__":
     main() 

@@ -121,7 +121,7 @@ class VectorDatabaseService:
                         'values': record['embedding'],
                         'metadata': metadata
                     }
-                    print(vector_data)
+                    
                     batch_vectors.append(vector_data)
                     
                 except Exception as e:
@@ -157,57 +157,113 @@ class VectorDatabaseService:
         return stats
     
     def _prepare_metadata(self, record: Dict[str, Any]) -> Dict[str, Any]:
+        """Prepare comprehensive metadata optimized for filtering and search performance."""
         permit_info = record['record'].get('permit_info', {})
         location = record['record'].get('location', {})
         dates = record['record'].get('dates', {})
         valuation = record['record'].get('valuation', {})
         contractor = record['record'].get('contractor', {})
         applicant = record['record'].get('applicant', {})
+        project = record['record'].get('project', {})
         
         metadata = {
-            # Core identifiers
+            # ===== CORE IDENTIFIERS =====
             'record_id': record['record_id'],
             'permit_number': permit_info.get('permit_number'),
-            'project_id': record['record'].get('project', {}).get('project_id'),
+            'project_id': project.get('project_id'),
+            'master_permit_number': project.get('master_permit_number'),
             
-            # Permit classification
+            # ===== PERMIT CLASSIFICATION =====
             'permit_type': permit_info.get('permit_type'),
+            'permit_type_description': permit_info.get('permit_type_description'),
             'permit_class': permit_info.get('permit_class'),
+            'permit_class_original': permit_info.get('permit_class_original'),
             'work_class': permit_info.get('work_class'),
             'status': permit_info.get('status'),
+            'issue_method': permit_info.get('issue_method'),
             
-            # Location
+            # ===== LOCATION DATA =====
+            'address': location.get('address'),
+            'original_address': location.get('original_address'),
             'city': location.get('city'),
             'state': location.get('state'),
             'zip_code': location.get('zip_code'),
             'council_district': location.get('council_district'),
+            'jurisdiction': location.get('jurisdiction'),
+            'property_id': location.get('property_id'),
+            'legal_description': location.get('legal_description'),
+            'latitude': location.get('latitude'),
+            'longitude': location.get('longitude'),
+            'total_lot_sqft': location.get('total_lot_sqft'),
             
-            # Dates (as strings for filtering)
+            # ===== DATES (for filtering and sorting) =====
             'applied_date': dates.get('applied_date'),
             'issue_date': dates.get('issue_date'),
-            'calendar_year': dates.get('calendar_year'),
+            'expires_date': dates.get('expires_date'),
+            'completed_date': dates.get('completed_date'),
+            'calendar_year_issued': dates.get('calendar_year'),  # Match your filter name
+            'fiscal_year_issued': dates.get('fiscal_year'),      # Match your filter name
+            'day_issued': dates.get('day_issued'),
             
-            # Valuation (as numbers for range queries)
+            # ===== VALUATION (numeric for range queries) =====
             'total_job_valuation': valuation.get('total_job_valuation'),
             'total_new_addition_sqft': valuation.get('total_new_addition_sqft'),
             'total_existing_building_sqft': valuation.get('total_existing_building_sqft'),
+            'remodel_repair_sqft': valuation.get('remodel_repair_sqft'),
+            'total_valuation_remodel': valuation.get('total_valuation_remodel'),
+            'number_of_floors': valuation.get('number_of_floors'),
+            'housing_units': valuation.get('housing_units'),
             
-            # Contractor
+            # ===== TRADE-SPECIFIC VALUATIONS =====
+            'building_valuation': valuation.get('building_valuation'),
+            'building_valuation_remodel': valuation.get('building_valuation_remodel'),
+            'electrical_valuation': valuation.get('electrical_valuation'),
+            'electrical_valuation_remodel': valuation.get('electrical_valuation_remodel'),
+            'mechanical_valuation': valuation.get('mechanical_valuation'),
+            'mechanical_valuation_remodel': valuation.get('mechanical_valuation_remodel'),
+            'plumbing_valuation': valuation.get('plumbing_valuation'),
+            'plumbing_valuation_remodel': valuation.get('plumbing_valuation_remodel'),
+            'medgas_valuation': valuation.get('medgas_valuation'),
+            'medgas_valuation_remodel': valuation.get('medgas_valuation_remodel'),
+            
+            # ===== CONTRACTOR INFORMATION =====
             'contractor_company': contractor.get('contractor_company_name'),
             'contractor_trade': contractor.get('contractor_trade'),
+            'contractor_full_name': contractor.get('contractor_full_name'),
+            'contractor_phone': contractor.get('contractor_phone'),
+            'contractor_address1': contractor.get('contractor_address1'),
+            'contractor_address2': contractor.get('contractor_address2'),
+            'contractor_city': contractor.get('contractor_city'),
+            'contractor_zip': contractor.get('contractor_zip'),
             
-            # Applicant
+            # ===== APPLICANT INFORMATION =====
             'applicant_name': applicant.get('applicant_full_name'),
             'applicant_organization': applicant.get('applicant_organization'),
+            'applicant_phone': applicant.get('applicant_phone'),
+            'applicant_address1': applicant.get('applicant_address1'),
+            'applicant_address2': applicant.get('applicant_address2'),
+            'applicant_city': applicant.get('applicant_city'),
+            'applicant_zip': applicant.get('applicant_zip'),
             
-            # Text for search
-            'text_block': record['text_block'][:1000],  # Truncate to avoid metadata size limits
+            # ===== PROJECT DETAILS =====
+            'project_description': project.get('description'),
+            'permit_link': project.get('permit_link'),
             
-            # Indexing metadata
+            # ===== BOOLEAN FLAGS =====
+            'condominium': permit_info.get('condominium'),
+            'certificate_of_occupancy': permit_info.get('certificate_of_occupancy'),
+            'recently_issued': permit_info.get('recently_issued'),
+            
+            # ===== SEARCH TEXT =====
+            'text_block': record['text_block'][:1500],  # Increased limit for better search
+            
+            # ===== INDEXING METADATA =====
             'indexed_at': datetime.now().isoformat(),
-            'embedding_model': 'text-embedding-3-small'
+            'embedding_model': 'text-embedding-3-small',
+            'text_block_length': len(record['text_block'])
         }
         
+        # Remove None values to save space
         metadata = {k: v for k, v in metadata.items() if v is not None}
         
         return metadata

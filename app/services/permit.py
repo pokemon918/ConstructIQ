@@ -145,4 +145,5 @@ class PermitService:
         except Exception as e:
             status['pinecone'] = f'error: {str(e)}'
         
-        return status 
+        return status
+    

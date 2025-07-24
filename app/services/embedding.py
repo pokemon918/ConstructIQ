@@ -14,85 +14,171 @@ class EmbeddingService:
         
         self.client = OpenAI(api_key=self.api_key)
         self.model = "text-embedding-3-small"
-        self.dimensions = 1536  # text-embedding-3-small dimensions
+        self.dimensions = 1536
         
-        # Rate limiting settings
         self.requests_per_minute = 3500
         self.tokens_per_minute = 350000
         self.last_request_time = 0
         self.min_request_interval = 60.0 / self.requests_per_minute
         
     def create_text_block(self, record: Dict[str, Any]) -> str:
-        # Extract relevant fields for embedding
-        fields = []
+        """Create a comprehensive text block optimized for semantic search performance."""
+        sections = []
         
-        # Core permit information
-        if record.get('permit_info', {}).get('description'):
-            fields.append(f"Description: {record['permit_info']['description']}")
+        # 1. PROJECT DESCRIPTION (highest priority for semantic search)
+        project_desc = record.get('project', {}).get('description')
+        if project_desc:
+            sections.append(f"PROJECT: {project_desc}")
         
-        if record.get('permit_info', {}).get('permit_type'):
-            fields.append(f"Permit Type: {record['permit_info']['permit_type']}")
-            
-        if record.get('permit_info', {}).get('permit_type_description'):
-            fields.append(f"Permit Type Description: {record['permit_info']['permit_type_description']}")
-            
-        if record.get('permit_info', {}).get('work_class'):
-            fields.append(f"Work Class: {record['permit_info']['work_class']}")
-            
-        if record.get('permit_info', {}).get('permit_class'):
-            fields.append(f"Permit Class: {record['permit_info']['permit_class']}")
-            
-        if record.get('permit_info', {}).get('status'):
-            fields.append(f"Status: {record['permit_info']['status']}")
+        # 2. PERMIT DETAILS
+        permit_info = record.get('permit_info', {})
+        permit_details = []
         
-        # Location information
-        if record.get('location', {}).get('address'):
-            fields.append(f"Address: {record['location']['address']}")
-            
-        if record.get('location', {}).get('city'):
-            fields.append(f"City: {record['location']['city']}")
-            
-        if record.get('location', {}).get('legal_description'):
-            fields.append(f"Legal Description: {record['location']['legal_description']}")
+        if permit_info.get('permit_type_description'):
+            permit_details.append(permit_info['permit_type_description'])
+        if permit_info.get('permit_type'):
+            permit_details.append(permit_info['permit_type'])
+        if permit_info.get('work_class'):
+            permit_details.append(permit_info['work_class'])
+        if permit_info.get('permit_class'):
+            permit_details.append(permit_info['permit_class'])
+        if permit_info.get('status'):
+            permit_details.append(permit_info['status'])
         
-        # Contractor information
-        if record.get('contractor', {}).get('contractor_company_name'):
-            fields.append(f"Contractor: {record['contractor']['contractor_company_name']}")
-            
-        if record.get('contractor', {}).get('contractor_trade'):
-            fields.append(f"Contractor Trade: {record['contractor']['contractor_trade']}")
+        if permit_details:
+            sections.append(f"PERMIT TYPE: {' | '.join(permit_details)}")
         
-        # Applicant information
-        if record.get('applicant', {}).get('applicant_full_name'):
-            fields.append(f"Applicant: {record['applicant']['applicant_full_name']}")
-            
-        if record.get('applicant', {}).get('applicant_organization'):
-            fields.append(f"Applicant Organization: {record['applicant']['applicant_organization']}")
+        # 3. LOCATION INFORMATION
+        location = record.get('location', {})
+        location_parts = []
         
-        # Project information
-        if record.get('project', {}).get('project_id'):
-            fields.append(f"Project ID: {record['project']['project_id']}")
-            
-        if record.get('project', {}).get('master_permit_number'):
-            fields.append(f"Master Permit: {record['project']['master_permit_number']}")
+        if location.get('address'):
+            location_parts.append(location['address'])
+        if location.get('city'):
+            location_parts.append(location['city'])
+        if location.get('state'):
+            location_parts.append(location['state'])
+        if location.get('legal_description'):
+            location_parts.append(location['legal_description'])
         
-        # Valuation information (if significant)
+        if location_parts:
+            sections.append(f"LOCATION: {' | '.join(location_parts)}")
+        
+        # 4. CONTRACTOR INFORMATION
+        contractor = record.get('contractor', {})
+        contractor_info = []
+        
+        if contractor.get('contractor_company_name'):
+            contractor_info.append(contractor['contractor_company_name'])
+        if contractor.get('contractor_trade'):
+            contractor_info.append(contractor['contractor_trade'])
+        if contractor.get('contractor_full_name'):
+            contractor_info.append(contractor['contractor_full_name'])
+        
+        if contractor_info:
+            sections.append(f"CONTRACTOR: {' | '.join(contractor_info)}")
+        
+        # 5. APPLICANT INFORMATION
+        applicant = record.get('applicant', {})
+        applicant_info = []
+        
+        if applicant.get('applicant_full_name'):
+            applicant_info.append(applicant['applicant_full_name'])
+        if applicant.get('applicant_organization'):
+            applicant_info.append(applicant['applicant_organization'])
+        
+        if applicant_info:
+            sections.append(f"APPLICANT: {' | '.join(applicant_info)}")
+        
+        # 6. VALUATION AND SCOPE
         valuation = record.get('valuation', {})
+        valuation_info = []
+        
         if valuation.get('total_job_valuation') and valuation['total_job_valuation'] > 0:
-            fields.append(f"Job Valuation: ${valuation['total_job_valuation']:,.2f}")
-            
+            valuation_info.append(f"Total Value: ${valuation['total_job_valuation']:,.0f}")
         if valuation.get('total_new_addition_sqft') and valuation['total_new_addition_sqft'] > 0:
-            fields.append(f"New Addition Sqft: {valuation['total_new_addition_sqft']}")
-            
+            valuation_info.append(f"New Addition: {valuation['total_new_addition_sqft']} sqft")
         if valuation.get('total_existing_building_sqft') and valuation['total_existing_building_sqft'] > 0:
-            fields.append(f"Existing Building Sqft: {valuation['total_existing_building_sqft']}")
+            valuation_info.append(f"Existing Building: {valuation['total_existing_building_sqft']} sqft")
+        if valuation.get('remodel_repair_sqft') and valuation['remodel_repair_sqft'] > 0:
+            valuation_info.append(f"Remodel/Repair: {valuation['remodel_repair_sqft']} sqft")
+        if valuation.get('number_of_floors') and valuation['number_of_floors'] > 0:
+            valuation_info.append(f"Floors: {valuation['number_of_floors']}")
+        if valuation.get('housing_units') and valuation['housing_units'] > 0:
+            valuation_info.append(f"Housing Units: {valuation['housing_units']}")
         
-        # Join all fields into a single text block
-        text_block = " | ".join(fields)
+        # Add specific trade valuations
+        trade_valuations = []
+        for trade in ['building', 'electrical', 'mechanical', 'plumbing', 'medgas']:
+            trade_val = valuation.get(f'{trade}_valuation')
+            trade_remodel = valuation.get(f'{trade}_valuation_remodel')
+            if trade_val and trade_val > 0:
+                trade_valuations.append(f"{trade.title()}: ${trade_val:,.0f}")
+            if trade_remodel and trade_remodel > 0:
+                trade_valuations.append(f"{trade.title()} Remodel: ${trade_remodel:,.0f}")
         
-        # Ensure the text block is not empty
+        if trade_valuations:
+            valuation_info.extend(trade_valuations)
+        
+        if valuation_info:
+            sections.append(f"VALUATION: {' | '.join(valuation_info)}")
+        
+        # 7. DATES AND TIMELINE
+        dates = record.get('dates', {})
+        date_info = []
+        
+        if dates.get('applied_date'):
+            date_info.append(f"Applied: {dates['applied_date'][:10]}")
+        if dates.get('issue_date'):
+            date_info.append(f"Issued: {dates['issue_date'][:10]}")
+        if dates.get('calendar_year'):
+            date_info.append(f"Year: {dates['calendar_year']}")
+        if dates.get('day_issued'):
+            date_info.append(f"Day: {dates['day_issued']}")
+        
+        if date_info:
+            sections.append(f"DATES: {' | '.join(date_info)}")
+        
+        # 8. PROJECT RELATIONSHIPS
+        project = record.get('project', {})
+        project_info = []
+        
+        if project.get('project_id'):
+            project_info.append(f"Project ID: {project['project_id']}")
+        if project.get('master_permit_number'):
+            project_info.append(f"Master Permit: {project['master_permit_number']}")
+        
+        if project_info:
+            sections.append(f"PROJECT INFO: {' | '.join(project_info)}")
+        
+        # 9. ADDITIONAL CONTEXT
+        additional_info = []
+        
+        if permit_info.get('condominium'):
+            additional_info.append("Condominium")
+        if permit_info.get('certificate_of_occupancy'):
+            additional_info.append("Certificate of Occupancy")
+        if permit_info.get('recently_issued'):
+            additional_info.append("Recently Issued")
+        if location.get('council_district'):
+            additional_info.append(f"Council District {location['council_district']}")
+        if location.get('jurisdiction'):
+            additional_info.append(location['jurisdiction'])
+        
+        if additional_info:
+            sections.append(f"CONTEXT: {' | '.join(additional_info)}")
+        
+        # Combine all sections with clear separators
+        text_block = " || ".join(sections)
+        
+        # Ensure the text block is not empty and has meaningful content
         if not text_block.strip():
-            text_block = f"Permit {record.get('permit_info', {}).get('permit_number', 'Unknown')}"
+            permit_number = record.get('permit_info', {}).get('permit_number', 'Unknown')
+            text_block = f"Permit {permit_number} - No detailed information available"
+        
+        # Truncate if too long (OpenAI has token limits)
+        if len(text_block) > 4000:
+            text_block = text_block[:4000] + "..."
             
         return text_block
     
