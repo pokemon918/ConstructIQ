@@ -23,7 +23,7 @@ class SearchFilters(BaseModel):
     city: Optional[str] = Field(None, description="City name")
     state: Optional[str] = Field(None, description="State name")
     zip_code: Optional[str] = Field(None, description="ZIP code")
-    council_district: Optional[Dict[str, Any]] = Field(None, description="Council district with operators")
+    council_district: Optional[Any] = Field(None, description="Council district (integer, string, or operators dict)")
     jurisdiction: Optional[str] = Field(None, description="Jurisdiction")
     property_id: Optional[str] = Field(None, description="Property ID")
     legal_description: Optional[str] = Field(None, description="Legal description")
@@ -41,7 +41,7 @@ class SearchFilters(BaseModel):
     day_issued: Optional[str] = Field(None, description="Day issued")
     
     # ===== VALUATION =====
-    total_job_valuation: Optional[Dict[str, Any]] = Field(None, description="Total job valuation with operators")
+    total_job_valuation: Optional[Any] = Field(None, description="Total job valuation (number or operators dict)")
     total_new_addition_sqft: Optional[Dict[str, Any]] = Field(None, description="Total new addition square footage with operators")
     total_existing_building_sqft: Optional[Dict[str, Any]] = Field(None, description="Total existing building square footage with operators")
     remodel_repair_sqft: Optional[Dict[str, Any]] = Field(None, description="Remodel repair square footage with operators")

@@ -1,0 +1,1122 @@
+[
+  {
+    "permit_info": {
+      "permit_number": "2011-033316 PP",
+      "permit_type": null,
+      "permit_type_description": "Plumbing Permit",
+      "permit_class": "Residential",
+      "permit_class_original": "Residential",
+      "work_class": "Remodel",
+      "status": "VOID",
+      "status_date": "2017-04-24T00:00:00",
+      "issue_method": "Permit Center",
+      "recently_issued": false,
+      "condominium": false,
+      "certificate_of_occupancy": false
+    },
+    "location": {
+      "address": "3601 BROWNWOOD DR",
+      "original_address": "3601 BROWNWOOD DR",
+      "city": "AUSTIN",
+      "state": "TX",
+      "zip_code": "78759",
+      "latitude": 30.3657243,
+      "longitude": -97.74718985,
+      "property_id": "0242020305",
+      "legal_description": "LOT 4 BLK K BALCONES WEST SEC 2",
+      "council_district": 10,
+      "jurisdiction": "AUSTIN FULL PURPOSE",
+      "location_coordinates": "\n,  \n(30.3657243, -97.74718985)",
+      "total_lot_sqft": null
+    },
+    "dates": {
+      "applied_date": "2011-04-20T00:00:00",
+      "issue_date": "2011-04-20T00:00:00",
+      "day_issued": "WEDNESDAY",
+      "calendar_year": 2011,
+      "fiscal_year": 2011,
+      "expires_date": "2011-10-17T00:00:00",
+      "completed_date": null
+    },
+    "project": {
+      "description": "Tunnel under the house from outside to repair the drain line.",
+      "project_id": "10579049",
+      "master_permit_number": null,
+      "permit_link": "https://abc.austintexas.gov/web/permit/public-search-other?t_detail=1&t_selected_folderrsn=10579049"
+    },
+    "valuation": {
+      "total_existing_building_sqft": null,
+      "remodel_repair_sqft": null,
+      "total_new_addition_sqft": null,
+      "total_valuation_remodel": null,
+      "total_job_valuation": null,
+      "number_of_floors": 0,
+      "housing_units": 0,
+      "building_valuation": null,
+      "building_valuation_remodel": null,
+      "electrical_valuation": null,
+      "electrical_valuation_remodel": null,
+      "mechanical_valuation": null,
+      "mechanical_valuation_remodel": null,
+      "plumbing_valuation": null,
+      "plumbing_valuation_remodel": 8360.0,
+      "medgas_valuation": null,
+      "medgas_valuation_remodel": null
+    },
+    "contractor": {
+      "contractor_trade": null,
+      "contractor_company_name": null,
+      "contractor_full_name": null,
+      "contractor_phone": null,
+      "contractor_address1": null,
+      "contractor_address2": null,
+      "contractor_city": null,
+      "contractor_zip": null
+    },
+    "applicant": {
+      "applicant_full_name": null,
+      "applicant_organization": null,
+      "applicant_phone": null,
+      "applicant_address1": null,
+      "applicant_address2": null,
+      "applicant_city": null,
+      "applicant_zip": null
+    },
+    "geographic": {
+      "region_8spj_utxs": null,
+      "region_q9nd_rr82": null,
+      "region_e9j2_6w3z": null,
+      "region_m2th_e4b7": null,
+      "region_rxpj_nzrk": null,
+      "region_a3it_2a2z": null,
+      "region_qwte_z96m": null,
+      "region_i2aj_cj5t": null,
+      "region_xzeg_zdjk": null,
+      "region_6gig_z43c": null
+    },
+    "metadata": {
+      "raw_field_count": 68,
+      "processing_timestamp": "2025-07-23T13:24:11.265252",
+      "data_source": "Austin Texas Government API",
+      "record_id": "2011-033316 PP_10579049"
+    },
+    "validation": {
+      "is_valid": false,
+      "missing_required_fields": [
+        "permit_info.permit_type"
+      ],
+      "quality_score": 0.8888888888888888,
+      "issues": [
+        "Missing 1 required fields"
+      ]
+    }
+  },
+  {
+    "permit_info": {
+      "permit_number": "2011-031253 EP",
+      "permit_type": null,
+      "permit_type_description": "Electrical Permit",
+      "permit_class": "Commercial",
+      "permit_class_original": "Sign Permit",
+      "work_class": "Wall",
+      "status": "Final",
+      "status_date": "2011-08-09T00:00:00",
+      "issue_method": "Permit Center",
+      "recently_issued": false,
+      "condominium": false,
+      "certificate_of_occupancy": false
+    },
+    "location": {
+      "address": "320 W 2ND ST",
+      "original_address": "320 W 2ND ST",
+      "city": "AUSTIN",
+      "state": "TX",
+      "zip_code": "78701",
+      "latitude": 30.26536572,
+      "longitude": -97.7473941,
+      "property_id": "0205011401",
+      "legal_description": null,
+      "council_district": 9,
+      "jurisdiction": "AUSTIN FULL PURPOSE",
+      "location_coordinates": "\n,  \n(30.26536572, -97.7473941)",
+      "total_lot_sqft": null
+    },
+    "dates": {
+      "applied_date": "2011-04-13T00:00:00",
+      "issue_date": "2011-04-13T00:00:00",
+      "day_issued": "WEDNESDAY",
+      "calendar_year": 2011,
+      "fiscal_year": 2011,
+      "expires_date": "2011-08-09T00:00:00",
+      "completed_date": "2011-08-09T00:00:00"
+    },
+    "project": {
+      "description": "Wall Sign Urban",
+      "project_id": "10574693",
+      "master_permit_number": "10573506",
+      "permit_link": "https://abc.austintexas.gov/web/permit/public-search-other?t_detail=1&t_selected_folderrsn=10574693"
+    },
+    "valuation": {
+      "total_existing_building_sqft": null,
+      "remodel_repair_sqft": null,
+      "total_new_addition_sqft": null,
+      "total_valuation_remodel": null,
+      "total_job_valuation": null,
+      "number_of_floors": null,
+      "housing_units": null,
+      "building_valuation": null,
+      "building_valuation_remodel": null,
+      "electrical_valuation": null,
+      "electrical_valuation_remodel": 500.0,
+      "mechanical_valuation": null,
+      "mechanical_valuation_remodel": null,
+      "plumbing_valuation": null,
+      "plumbing_valuation_remodel": null,
+      "medgas_valuation": null,
+      "medgas_valuation_remodel": null
+    },
+    "contractor": {
+      "contractor_trade": null,
+      "contractor_company_name": null,
+      "contractor_full_name": null,
+      "contractor_phone": null,
+      "contractor_address1": null,
+      "contractor_address2": null,
+      "contractor_city": null,
+      "contractor_zip": null
+    },
+    "applicant": {
+      "applicant_full_name": null,
+      "applicant_organization": null,
+      "applicant_phone": null,
+      "applicant_address1": null,
+      "applicant_address2": null,
+      "applicant_city": null,
+      "applicant_zip": null
+    },
+    "geographic": {
+      "region_8spj_utxs": null,
+      "region_q9nd_rr82": null,
+      "region_e9j2_6w3z": null,
+      "region_m2th_e4b7": null,
+      "region_rxpj_nzrk": null,
+      "region_a3it_2a2z": null,
+      "region_qwte_z96m": null,
+      "region_i2aj_cj5t": null,
+      "region_xzeg_zdjk": null,
+      "region_6gig_z43c": null
+    },
+    "metadata": {
+      "raw_field_count": 68,
+      "processing_timestamp": "2025-07-23T13:24:11.265252",
+      "data_source": "Austin Texas Government API",
+      "record_id": "2011-031253 EP_10574693"
+    },
+    "validation": {
+      "is_valid": false,
+      "missing_required_fields": [
+        "permit_info.permit_type"
+      ],
+      "quality_score": 0.8888888888888888,
+      "issues": [
+        "Missing 1 required fields"
+      ]
+    }
+  },
+  {
+    "permit_info": {
+      "permit_number": "2011-030767 PP",
+      "permit_type": null,
+      "permit_type_description": "Plumbing Permit",
+      "permit_class": "Residential",
+      "permit_class_original": "Residential",
+      "work_class": "Irrigation",
+      "status": "Expired",
+      "status_date": "2011-10-10T00:00:00",
+      "issue_method": "Permit Center",
+      "recently_issued": false,
+      "condominium": false,
+      "certificate_of_occupancy": false
+    },
+    "location": {
+      "address": "5428 HITCHER BND",
+      "original_address": "5428 HITCHER BND",
+      "city": "AUSTIN",
+      "state": "TX",
+      "zip_code": "78749",
+      "latitude": 30.2095771,
+      "longitude": -97.86567984,
+      "property_id": "0416361604",
+      "legal_description": "LOT 4 BLK C VILLAGE AT WESTERN OAKS SEC 18-A",
+      "council_district": 8,
+      "jurisdiction": "AUSTIN FULL PURPOSE",
+      "location_coordinates": "\n,  \n(30.2095771, -97.86567984)",
+      "total_lot_sqft": null
+    },
+    "dates": {
+      "applied_date": "2011-04-12T00:00:00",
+      "issue_date": "2011-04-12T00:00:00",
+      "day_issued": "TUESDAY",
+      "calendar_year": 2011,
+      "fiscal_year": 2011,
+      "expires_date": "2011-10-09T00:00:00",
+      "completed_date": null
+    },
+    "project": {
+      "description": "Install entire irrigation system to existing res only.",
+      "project_id": "10574135",
+      "master_permit_number": null,
+      "permit_link": "https://abc.austintexas.gov/web/permit/public-search-other?t_detail=1&t_selected_folderrsn=10574135"
+    },
+    "valuation": {
+      "total_existing_building_sqft": null,
+      "remodel_repair_sqft": null,
+      "total_new_addition_sqft": null,
+      "total_valuation_remodel": null,
+      "total_job_valuation": null,
+      "number_of_floors": null,
+      "housing_units": null,
+      "building_valuation": null,
+      "building_valuation_remodel": null,
+      "electrical_valuation": null,
+      "electrical_valuation_remodel": null,
+      "mechanical_valuation": null,
+      "mechanical_valuation_remodel": null,
+      "plumbing_valuation": null,
+      "plumbing_valuation_remodel": 1900.0,
+      "medgas_valuation": null,
+      "medgas_valuation_remodel": null
+    },
+    "contractor": {
+      "contractor_trade": null,
+      "contractor_company_name": null,
+      "contractor_full_name": null,
+      "contractor_phone": null,
+      "contractor_address1": null,
+      "contractor_address2": null,
+      "contractor_city": null,
+      "contractor_zip": null
+    },
+    "applicant": {
+      "applicant_full_name": null,
+      "applicant_organization": null,
+      "applicant_phone": null,
+      "applicant_address1": null,
+      "applicant_address2": null,
+      "applicant_city": null,
+      "applicant_zip": null
+    },
+    "geographic": {
+      "region_8spj_utxs": null,
+      "region_q9nd_rr82": null,
+      "region_e9j2_6w3z": null,
+      "region_m2th_e4b7": null,
+      "region_rxpj_nzrk": null,
+      "region_a3it_2a2z": null,
+      "region_qwte_z96m": null,
+      "region_i2aj_cj5t": null,
+      "region_xzeg_zdjk": null,
+      "region_6gig_z43c": null
+    },
+    "metadata": {
+      "raw_field_count": 68,
+      "processing_timestamp": "2025-07-23T13:24:11.265252",
+      "data_source": "Austin Texas Government API",
+      "record_id": "2011-030767 PP_10574135"
+    },
+    "validation": {
+      "is_valid": false,
+      "missing_required_fields": [
+        "permit_info.permit_type"
+      ],
+      "quality_score": 0.8888888888888888,
+      "issues": [
+        "Missing 1 required fields"
+      ]
+    }
+  },
+  {
+    "permit_info": {
+      "permit_number": "2011-026930 PP",
+      "permit_type": null,
+      "permit_type_description": "Plumbing Permit",
+      "permit_class": "Residential",
+      "permit_class_original": "Residential",
+      "work_class": "Irrigation",
+      "status": "Withdrawn",
+      "status_date": "2011-06-24T00:00:00",
+      "issue_method": "Permit Center",
+      "recently_issued": false,
+      "condominium": false,
+      "certificate_of_occupancy": false
+    },
+    "location": {
+      "address": "1302 RICHCREEK RD",
+      "original_address": "1302 RICHCREEK RD",
+      "city": "AUSTIN",
+      "state": "TX",
+      "zip_code": "78757",
+      "latitude": 30.34565274,
+      "longitude": -97.72372608,
+      "property_id": "0235081021",
+      "legal_description": "E 5FT OF LOT 56 CRESTVIEW ADDN SEC 7",
+      "council_district": 7,
+      "jurisdiction": "AUSTIN FULL PURPOSE",
+      "location_coordinates": "\n,  \n(30.34565274, -97.72372608)",
+      "total_lot_sqft": null
+    },
+    "dates": {
+      "applied_date": "2011-04-01T00:00:00",
+      "issue_date": "2011-04-01T00:00:00",
+      "day_issued": "FRIDAY",
+      "calendar_year": 2011,
+      "fiscal_year": 2011,
+      "expires_date": "2011-09-28T00:00:00",
+      "completed_date": "2011-06-24T00:00:00"
+    },
+    "project": {
+      "description": "Install entire irrigation system to existing res only.",
+      "project_id": "10567874",
+      "master_permit_number": null,
+      "permit_link": "https://abc.austintexas.gov/web/permit/public-search-other?t_detail=1&t_selected_folderrsn=10567874"
+    },
+    "valuation": {
+      "total_existing_building_sqft": null,
+      "remodel_repair_sqft": null,
+      "total_new_addition_sqft": null,
+      "total_valuation_remodel": null,
+      "total_job_valuation": null,
+      "number_of_floors": null,
+      "housing_units": null,
+      "building_valuation": null,
+      "building_valuation_remodel": null,
+      "electrical_valuation": null,
+      "electrical_valuation_remodel": null,
+      "mechanical_valuation": null,
+      "mechanical_valuation_remodel": null,
+      "plumbing_valuation": null,
+      "plumbing_valuation_remodel": 1500.0,
+      "medgas_valuation": null,
+      "medgas_valuation_remodel": null
+    },
+    "contractor": {
+      "contractor_trade": null,
+      "contractor_company_name": null,
+      "contractor_full_name": null,
+      "contractor_phone": null,
+      "contractor_address1": null,
+      "contractor_address2": null,
+      "contractor_city": null,
+      "contractor_zip": null
+    },
+    "applicant": {
+      "applicant_full_name": null,
+      "applicant_organization": null,
+      "applicant_phone": null,
+      "applicant_address1": null,
+      "applicant_address2": null,
+      "applicant_city": null,
+      "applicant_zip": null
+    },
+    "geographic": {
+      "region_8spj_utxs": null,
+      "region_q9nd_rr82": null,
+      "region_e9j2_6w3z": null,
+      "region_m2th_e4b7": null,
+      "region_rxpj_nzrk": null,
+      "region_a3it_2a2z": null,
+      "region_qwte_z96m": null,
+      "region_i2aj_cj5t": null,
+      "region_xzeg_zdjk": null,
+      "region_6gig_z43c": null
+    },
+    "metadata": {
+      "raw_field_count": 68,
+      "processing_timestamp": "2025-07-23T13:24:11.265252",
+      "data_source": "Austin Texas Government API",
+      "record_id": "2011-026930 PP_10567874"
+    },
+    "validation": {
+      "is_valid": false,
+      "missing_required_fields": [
+        "permit_info.permit_type"
+      ],
+      "quality_score": 0.8888888888888888,
+      "issues": [
+        "Missing 1 required fields"
+      ]
+    }
+  },
+  {
+    "permit_info": {
+      "permit_number": "2011-026425 PP",
+      "permit_type": null,
+      "permit_type_description": "Plumbing Permit",
+      "permit_class": "Residential",
+      "permit_class_original": "Residential",
+      "work_class": "Irrigation",
+      "status": "Final",
+      "status_date": "2015-06-10T00:00:00",
+      "issue_method": "Permit Center",
+      "recently_issued": false,
+      "condominium": false,
+      "certificate_of_occupancy": false
+    },
+    "location": {
+      "address": "1812 KENWOOD AVE",
+      "original_address": "1812 KENWOOD AVE",
+      "city": "AUSTIN",
+      "state": "TX",
+      "zip_code": "78704",
+      "latitude": 30.24143625,
+      "longitude": -97.74214306,
+      "property_id": "0303020606",
+      "legal_description": "LOT 11A HENRY ADDN",
+      "council_district": 9,
+      "jurisdiction": "AUSTIN FULL PURPOSE",
+      "location_coordinates": "\n,  \n(30.24143625, -97.74214306)",
+      "total_lot_sqft": null
+    },
+    "dates": {
+      "applied_date": "2011-03-31T00:00:00",
+      "issue_date": "2011-03-31T00:00:00",
+      "day_issued": "THURSDAY",
+      "calendar_year": 2011,
+      "fiscal_year": 2011,
+      "expires_date": "2015-06-10T00:00:00",
+      "completed_date": "2015-06-10T00:00:00"
+    },
+    "project": {
+      "description": "Install Irrigation system to res",
+      "project_id": "10567296",
+      "master_permit_number": null,
+      "permit_link": "https://abc.austintexas.gov/web/permit/public-search-other?t_detail=1&t_selected_folderrsn=10567296"
+    },
+    "valuation": {
+      "total_existing_building_sqft": null,
+      "remodel_repair_sqft": null,
+      "total_new_addition_sqft": null,
+      "total_valuation_remodel": null,
+      "total_job_valuation": null,
+      "number_of_floors": null,
+      "housing_units": null,
+      "building_valuation": null,
+      "building_valuation_remodel": null,
+      "electrical_valuation": null,
+      "electrical_valuation_remodel": null,
+      "mechanical_valuation": null,
+      "mechanical_valuation_remodel": null,
+      "plumbing_valuation": null,
+      "plumbing_valuation_remodel": 3500.0,
+      "medgas_valuation": null,
+      "medgas_valuation_remodel": null
+    },
+    "contractor": {
+      "contractor_trade": null,
+      "contractor_company_name": null,
+      "contractor_full_name": null,
+      "contractor_phone": null,
+      "contractor_address1": null,
+      "contractor_address2": null,
+      "contractor_city": null,
+      "contractor_zip": null
+    },
+    "applicant": {
+      "applicant_full_name": null,
+      "applicant_organization": null,
+      "applicant_phone": null,
+      "applicant_address1": null,
+      "applicant_address2": null,
+      "applicant_city": null,
+      "applicant_zip": null
+    },
+    "geographic": {
+      "region_8spj_utxs": null,
+      "region_q9nd_rr82": null,
+      "region_e9j2_6w3z": null,
+      "region_m2th_e4b7": null,
+      "region_rxpj_nzrk": null,
+      "region_a3it_2a2z": null,
+      "region_qwte_z96m": null,
+      "region_i2aj_cj5t": null,
+      "region_xzeg_zdjk": null,
+      "region_6gig_z43c": null
+    },
+    "metadata": {
+      "raw_field_count": 68,
+      "processing_timestamp": "2025-07-23T13:24:11.265252",
+      "data_source": "Austin Texas Government API",
+      "record_id": "2011-026425 PP_10567296"
+    },
+    "validation": {
+      "is_valid": false,
+      "missing_required_fields": [
+        "permit_info.permit_type"
+      ],
+      "quality_score": 0.8888888888888888,
+      "issues": [
+        "Missing 1 required fields"
+      ]
+    }
+  },
+  {
+    "permit_info": {
+      "permit_number": "2011-024113 PP",
+      "permit_type": null,
+      "permit_type_description": "Plumbing Permit",
+      "permit_class": "Residential",
+      "permit_class_original": "Residential",
+      "work_class": "Irrigation",
+      "status": "Final",
+      "status_date": "2011-07-11T00:00:00",
+      "issue_method": "Permit Center",
+      "recently_issued": false,
+      "condominium": false,
+      "certificate_of_occupancy": false
+    },
+    "location": {
+      "address": "1305 WALLER ST UNIT B",
+      "original_address": "1305 WALLER ST UNIT B",
+      "city": "AUSTIN",
+      "state": "TX",
+      "zip_code": "78702",
+      "latitude": 30.27386028,
+      "longitude": -97.7290003,
+      "property_id": "0209061301",
+      "legal_description": null,
+      "council_district": 1,
+      "jurisdiction": "AUSTIN FULL PURPOSE",
+      "location_coordinates": "\n,  \n(30.27386028, -97.7290003)",
+      "total_lot_sqft": null
+    },
+    "dates": {
+      "applied_date": "2011-03-24T00:00:00",
+      "issue_date": "2011-03-24T00:00:00",
+      "day_issued": "THURSDAY",
+      "calendar_year": 2011,
+      "fiscal_year": 2011,
+      "expires_date": "2011-07-11T00:00:00",
+      "completed_date": "2011-07-11T00:00:00"
+    },
+    "project": {
+      "description": "Install irrigation system to exsting duplex (Side B) only",
+      "project_id": "10564625",
+      "master_permit_number": null,
+      "permit_link": "https://abc.austintexas.gov/web/permit/public-search-other?t_detail=1&t_selected_folderrsn=10564625"
+    },
+    "valuation": {
+      "total_existing_building_sqft": null,
+      "remodel_repair_sqft": null,
+      "total_new_addition_sqft": null,
+      "total_valuation_remodel": null,
+      "total_job_valuation": null,
+      "number_of_floors": null,
+      "housing_units": null,
+      "building_valuation": null,
+      "building_valuation_remodel": null,
+      "electrical_valuation": null,
+      "electrical_valuation_remodel": null,
+      "mechanical_valuation": null,
+      "mechanical_valuation_remodel": null,
+      "plumbing_valuation": null,
+      "plumbing_valuation_remodel": 1971.0,
+      "medgas_valuation": null,
+      "medgas_valuation_remodel": null
+    },
+    "contractor": {
+      "contractor_trade": null,
+      "contractor_company_name": null,
+      "contractor_full_name": null,
+      "contractor_phone": null,
+      "contractor_address1": null,
+      "contractor_address2": null,
+      "contractor_city": null,
+      "contractor_zip": null
+    },
+    "applicant": {
+      "applicant_full_name": null,
+      "applicant_organization": null,
+      "applicant_phone": null,
+      "applicant_address1": null,
+      "applicant_address2": null,
+      "applicant_city": null,
+      "applicant_zip": null
+    },
+    "geographic": {
+      "region_8spj_utxs": null,
+      "region_q9nd_rr82": null,
+      "region_e9j2_6w3z": null,
+      "region_m2th_e4b7": null,
+      "region_rxpj_nzrk": null,
+      "region_a3it_2a2z": null,
+      "region_qwte_z96m": null,
+      "region_i2aj_cj5t": null,
+      "region_xzeg_zdjk": null,
+      "region_6gig_z43c": null
+    },
+    "metadata": {
+      "raw_field_count": 68,
+      "processing_timestamp": "2025-07-23T13:24:11.265252",
+      "data_source": "Austin Texas Government API",
+      "record_id": "2011-024113 PP_10564625"
+    },
+    "validation": {
+      "is_valid": false,
+      "missing_required_fields": [
+        "permit_info.permit_type"
+      ],
+      "quality_score": 0.8888888888888888,
+      "issues": [
+        "Missing 1 required fields"
+      ]
+    }
+  },
+  {
+    "permit_info": {
+      "permit_number": "2010-104179 PP",
+      "permit_type": null,
+      "permit_type_description": "Plumbing Permit",
+      "permit_class": "Residential",
+      "permit_class_original": "Residential",
+      "work_class": "Change Out",
+      "status": "VOID",
+      "status_date": "2012-11-01T00:00:00",
+      "issue_method": "Permit Center",
+      "recently_issued": false,
+      "condominium": false,
+      "certificate_of_occupancy": false
+    },
+    "location": {
+      "address": "4901 SMOKEY MOUNTAIN DR",
+      "original_address": "4901 SMOKEY MOUNTAIN DR",
+      "city": "AUSTIN",
+      "state": "TX",
+      "zip_code": "78727",
+      "latitude": 30.42334683,
+      "longitude": -97.73113079,
+      "property_id": "0264031205",
+      "legal_description": "LOT 5 BLK C ANGUS VALLEY ANNEX SEC 3",
+      "council_district": 6,
+      "jurisdiction": "AUSTIN FULL PURPOSE",
+      "location_coordinates": "\n,  \n(30.42334683, -97.73113079)",
+      "total_lot_sqft": null
+    },
+    "dates": {
+      "applied_date": "2010-12-06T00:00:00",
+      "issue_date": "2010-12-06T00:00:00",
+      "day_issued": "MONDAY",
+      "calendar_year": 2010,
+      "fiscal_year": 2011,
+      "expires_date": "2011-09-11T00:00:00",
+      "completed_date": null
+    },
+    "project": {
+      "description": "Changeout water heater to existing residence only.",
+      "project_id": "10522905",
+      "master_permit_number": null,
+      "permit_link": "https://abc.austintexas.gov/web/permit/public-search-other?t_detail=1&t_selected_folderrsn=10522905"
+    },
+    "valuation": {
+      "total_existing_building_sqft": null,
+      "remodel_repair_sqft": null,
+      "total_new_addition_sqft": null,
+      "total_valuation_remodel": null,
+      "total_job_valuation": null,
+      "number_of_floors": null,
+      "housing_units": null,
+      "building_valuation": null,
+      "building_valuation_remodel": null,
+      "electrical_valuation": null,
+      "electrical_valuation_remodel": null,
+      "mechanical_valuation": null,
+      "mechanical_valuation_remodel": null,
+      "plumbing_valuation": null,
+      "plumbing_valuation_remodel": 567.0,
+      "medgas_valuation": null,
+      "medgas_valuation_remodel": null
+    },
+    "contractor": {
+      "contractor_trade": null,
+      "contractor_company_name": null,
+      "contractor_full_name": null,
+      "contractor_phone": null,
+      "contractor_address1": null,
+      "contractor_address2": null,
+      "contractor_city": null,
+      "contractor_zip": null
+    },
+    "applicant": {
+      "applicant_full_name": null,
+      "applicant_organization": null,
+      "applicant_phone": null,
+      "applicant_address1": null,
+      "applicant_address2": null,
+      "applicant_city": null,
+      "applicant_zip": null
+    },
+    "geographic": {
+      "region_8spj_utxs": null,
+      "region_q9nd_rr82": null,
+      "region_e9j2_6w3z": null,
+      "region_m2th_e4b7": null,
+      "region_rxpj_nzrk": null,
+      "region_a3it_2a2z": null,
+      "region_qwte_z96m": null,
+      "region_i2aj_cj5t": null,
+      "region_xzeg_zdjk": null,
+      "region_6gig_z43c": null
+    },
+    "metadata": {
+      "raw_field_count": 68,
+      "processing_timestamp": "2025-07-23T13:24:11.265252",
+      "data_source": "Austin Texas Government API",
+      "record_id": "2010-104179 PP_10522905"
+    },
+    "validation": {
+      "is_valid": false,
+      "missing_required_fields": [
+        "permit_info.permit_type"
+      ],
+      "quality_score": 0.8888888888888888,
+      "issues": [
+        "Missing 1 required fields"
+      ]
+    }
+  },
+  {
+    "permit_info": {
+      "permit_number": "2011-017450 EP",
+      "permit_type": null,
+      "permit_type_description": "Electrical Permit",
+      "permit_class": "Commercial",
+      "permit_class_original": "Sign Permit",
+      "work_class": "Wall",
+      "status": "Final",
+      "status_date": "2011-08-04T00:00:00",
+      "issue_method": "Permit Center",
+      "recently_issued": false,
+      "condominium": false,
+      "certificate_of_occupancy": false
+    },
+    "location": {
+      "address": "4625 W WILLIAM CANNON DR",
+      "original_address": "4625 W WILLIAM CANNON DR",
+      "city": "AUSTIN",
+      "state": "TX",
+      "zip_code": "78749",
+      "latitude": 30.22336296,
+      "longitude": -97.84359263,
+      "property_id": "0412280801",
+      "legal_description": null,
+      "council_district": 8,
+      "jurisdiction": "AUSTIN FULL PURPOSE",
+      "location_coordinates": "\n,  \n(30.22336296, -97.84359263)",
+      "total_lot_sqft": null
+    },
+    "dates": {
+      "applied_date": "2011-03-04T00:00:00",
+      "issue_date": "2011-03-04T00:00:00",
+      "day_issued": "FRIDAY",
+      "calendar_year": 2011,
+      "fiscal_year": 2011,
+      "expires_date": "2011-08-04T00:00:00",
+      "completed_date": "2011-08-04T00:00:00"
+    },
+    "project": {
+      "description": "Wall sign Freddys Frozen Custard & Steakburgers",
+      "project_id": "10555283",
+      "master_permit_number": "10540387",
+      "permit_link": "https://abc.austintexas.gov/web/permit/public-search-other?t_detail=1&t_selected_folderrsn=10555283"
+    },
+    "valuation": {
+      "total_existing_building_sqft": null,
+      "remodel_repair_sqft": 0.0,
+      "total_new_addition_sqft": null,
+      "total_valuation_remodel": null,
+      "total_job_valuation": null,
+      "number_of_floors": null,
+      "housing_units": null,
+      "building_valuation": null,
+      "building_valuation_remodel": null,
+      "electrical_valuation": null,
+      "electrical_valuation_remodel": 500.0,
+      "mechanical_valuation": null,
+      "mechanical_valuation_remodel": null,
+      "plumbing_valuation": null,
+      "plumbing_valuation_remodel": null,
+      "medgas_valuation": null,
+      "medgas_valuation_remodel": null
+    },
+    "contractor": {
+      "contractor_trade": null,
+      "contractor_company_name": null,
+      "contractor_full_name": null,
+      "contractor_phone": null,
+      "contractor_address1": null,
+      "contractor_address2": null,
+      "contractor_city": null,
+      "contractor_zip": null
+    },
+    "applicant": {
+      "applicant_full_name": null,
+      "applicant_organization": null,
+      "applicant_phone": null,
+      "applicant_address1": null,
+      "applicant_address2": null,
+      "applicant_city": null,
+      "applicant_zip": null
+    },
+    "geographic": {
+      "region_8spj_utxs": null,
+      "region_q9nd_rr82": null,
+      "region_e9j2_6w3z": null,
+      "region_m2th_e4b7": null,
+      "region_rxpj_nzrk": null,
+      "region_a3it_2a2z": null,
+      "region_qwte_z96m": null,
+      "region_i2aj_cj5t": null,
+      "region_xzeg_zdjk": null,
+      "region_6gig_z43c": null
+    },
+    "metadata": {
+      "raw_field_count": 68,
+      "processing_timestamp": "2025-07-23T13:24:11.265252",
+      "data_source": "Austin Texas Government API",
+      "record_id": "2011-017450 EP_10555283"
+    },
+    "validation": {
+      "is_valid": false,
+      "missing_required_fields": [
+        "permit_info.permit_type"
+      ],
+      "quality_score": 0.8888888888888888,
+      "issues": [
+        "Missing 1 required fields"
+      ]
+    }
+  },
+  {
+    "permit_info": {
+      "permit_number": "2010-097683 PP",
+      "permit_type": null,
+      "permit_type_description": "Plumbing Permit",
+      "permit_class": "Residential",
+      "permit_class_original": "Residential",
+      "work_class": "Irrigation",
+      "status": "Expired",
+      "status_date": "2011-05-12T00:00:00",
+      "issue_method": "Permit Center",
+      "recently_issued": false,
+      "condominium": false,
+      "certificate_of_occupancy": false
+    },
+    "location": {
+      "address": "11804 RUSTLE LN",
+      "original_address": "11804 RUSTLE LN",
+      "city": "AUSTIN",
+      "state": "TX",
+      "zip_code": "78750",
+      "latitude": 30.45106405,
+      "longitude": -97.81044687,
+      "property_id": "R078460",
+      "legal_description": "WOODLAND VILLAGE OF ANDERSON MILL SEC 3 BLOCK A LOT 6",
+      "council_district": 6,
+      "jurisdiction": "AUSTIN FULL PURPOSE",
+      "location_coordinates": "\n,  \n(30.45106405, -97.81044687)",
+      "total_lot_sqft": null
+    },
+    "dates": {
+      "applied_date": "2010-11-12T00:00:00",
+      "issue_date": "2010-11-12T00:00:00",
+      "day_issued": "FRIDAY",
+      "calendar_year": 2010,
+      "fiscal_year": 2011,
+      "expires_date": "2011-05-11T00:00:00",
+      "completed_date": null
+    },
+    "project": {
+      "description": "Install irrigation system to exsting resid only",
+      "project_id": "10514153",
+      "master_permit_number": null,
+      "permit_link": "https://abc.austintexas.gov/web/permit/public-search-other?t_detail=1&t_selected_folderrsn=10514153"
+    },
+    "valuation": {
+      "total_existing_building_sqft": null,
+      "remodel_repair_sqft": null,
+      "total_new_addition_sqft": null,
+      "total_valuation_remodel": null,
+      "total_job_valuation": null,
+      "number_of_floors": null,
+      "housing_units": null,
+      "building_valuation": null,
+      "building_valuation_remodel": null,
+      "electrical_valuation": null,
+      "electrical_valuation_remodel": null,
+      "mechanical_valuation": null,
+      "mechanical_valuation_remodel": null,
+      "plumbing_valuation": null,
+      "plumbing_valuation_remodel": 2500.0,
+      "medgas_valuation": null,
+      "medgas_valuation_remodel": null
+    },
+    "contractor": {
+      "contractor_trade": null,
+      "contractor_company_name": null,
+      "contractor_full_name": null,
+      "contractor_phone": null,
+      "contractor_address1": null,
+      "contractor_address2": null,
+      "contractor_city": null,
+      "contractor_zip": null
+    },
+    "applicant": {
+      "applicant_full_name": null,
+      "applicant_organization": null,
+      "applicant_phone": null,
+      "applicant_address1": null,
+      "applicant_address2": null,
+      "applicant_city": null,
+      "applicant_zip": null
+    },
+    "geographic": {
+      "region_8spj_utxs": null,
+      "region_q9nd_rr82": null,
+      "region_e9j2_6w3z": null,
+      "region_m2th_e4b7": null,
+      "region_rxpj_nzrk": null,
+      "region_a3it_2a2z": null,
+      "region_qwte_z96m": null,
+      "region_i2aj_cj5t": null,
+      "region_xzeg_zdjk": null,
+      "region_6gig_z43c": null
+    },
+    "metadata": {
+      "raw_field_count": 68,
+      "processing_timestamp": "2025-07-23T13:24:11.265252",
+      "data_source": "Austin Texas Government API",
+      "record_id": "2010-097683 PP_10514153"
+    },
+    "validation": {
+      "is_valid": false,
+      "missing_required_fields": [
+        "permit_info.permit_type"
+      ],
+      "quality_score": 0.8888888888888888,
+      "issues": [
+        "Missing 1 required fields"
+      ]
+    }
+  },
+  {
+    "permit_info": {
+      "permit_number": "2011-014213 PP",
+      "permit_type": null,
+      "permit_type_description": "Plumbing Permit",
+      "permit_class": "Commercial",
+      "permit_class_original": "Commercial",
+      "work_class": "Irrigation",
+      "status": "Expired",
+      "status_date": "2011-08-24T00:00:00",
+      "issue_method": "Permit Center",
+      "recently_issued": false,
+      "condominium": false,
+      "certificate_of_occupancy": false
+    },
+    "location": {
+      "address": "806 1/2 BRAZOS ST",
+      "original_address": "806 1/2 BRAZOS ST",
+      "city": "AUSTIN",
+      "state": "TX",
+      "zip_code": "78701",
+      "latitude": 30.26998953,
+      "longitude": -97.7407493,
+      "property_id": null,
+      "legal_description": null,
+      "council_district": 9,
+      "jurisdiction": "AUSTIN FULL PURPOSE",
+      "location_coordinates": "\n,  \n(30.26998953, -97.7407493)",
+      "total_lot_sqft": null
+    },
+    "dates": {
+      "applied_date": "2011-02-24T00:00:00",
+      "issue_date": "2011-02-24T00:00:00",
+      "day_issued": "THURSDAY",
+      "calendar_year": 2011,
+      "fiscal_year": 2011,
+      "expires_date": "2011-08-23T00:00:00",
+      "completed_date": null
+    },
+    "project": {
+      "description": "Install Irrigation System.",
+      "project_id": "10550658",
+      "master_permit_number": null,
+      "permit_link": "https://abc.austintexas.gov/web/permit/public-search-other?t_detail=1&t_selected_folderrsn=10550658"
+    },
+    "valuation": {
+      "total_existing_building_sqft": null,
+      "remodel_repair_sqft": null,
+      "total_new_addition_sqft": null,
+      "total_valuation_remodel": null,
+      "total_job_valuation": null,
+      "number_of_floors": null,
+      "housing_units": null,
+      "building_valuation": null,
+      "building_valuation_remodel": null,
+      "electrical_valuation": null,
+      "electrical_valuation_remodel": null,
+      "mechanical_valuation": null,
+      "mechanical_valuation_remodel": null,
+      "plumbing_valuation": null,
+      "plumbing_valuation_remodel": 6365.0,
+      "medgas_valuation": null,
+      "medgas_valuation_remodel": null
+    },
+    "contractor": {
+      "contractor_trade": null,
+      "contractor_company_name": null,
+      "contractor_full_name": null,
+      "contractor_phone": null,
+      "contractor_address1": null,
+      "contractor_address2": null,
+      "contractor_city": null,
+      "contractor_zip": null
+    },
+    "applicant": {
+      "applicant_full_name": null,
+      "applicant_organization": null,
+      "applicant_phone": null,
+      "applicant_address1": null,
+      "applicant_address2": null,
+      "applicant_city": null,
+      "applicant_zip": null
+    },
+    "geographic": {
+      "region_8spj_utxs": null,
+      "region_q9nd_rr82": null,
+      "region_e9j2_6w3z": null,
+      "region_m2th_e4b7": null,
+      "region_rxpj_nzrk": null,
+      "region_a3it_2a2z": null,
+      "region_qwte_z96m": null,
+      "region_i2aj_cj5t": null,
+      "region_xzeg_zdjk": null,
+      "region_6gig_z43c": null
+    },
+    "metadata": {
+      "raw_field_count": 68,
+      "processing_timestamp": "2025-07-23T13:24:11.265252",
+      "data_source": "Austin Texas Government API",
+      "record_id": "2011-014213 PP_10550658"
+    },
+    "validation": {
+      "is_valid": false,
+      "missing_required_fields": [
+        "permit_info.permit_type"
+      ],
+      "quality_score": 0.8888888888888888,
+      "issues": [
+        "Missing 1 required fields"
+      ]
+    }
+  }
+]
