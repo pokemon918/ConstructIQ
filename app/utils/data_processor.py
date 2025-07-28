@@ -7,6 +7,9 @@ from typing import Dict, List, Any, Optional
 logger = logging.getLogger(__name__)
 
 class PermitDataProcessor:    
+    # Schema version for tracking data structure changes
+    SCHEMA_VERSION = 1
+    
     def __init__(self):
         self.field_mappings = self._create_field_mappings()
         self.required_fields = self._get_required_fields()
@@ -280,7 +283,8 @@ class PermitDataProcessor:
             'raw_field_count': len(record),
             'processing_timestamp': datetime.now().isoformat(),
             'data_source': 'Austin Texas Government API',
-            'record_id': self._generate_record_id(record)
+            'record_id': self._generate_record_id(record),
+            'schema_version': self.SCHEMA_VERSION
         }
     
     def _validate_record(self, normalized_record: Dict[str, Any]) -> Dict[str, Any]:
@@ -440,3 +444,52 @@ class PermitDataProcessor:
             summary['quality_metrics']['average_quality_score'] /= len(normalized_data)
         
         return summary
+    
+    def get_schema_version(self) -> int:
+        return self.SCHEMA_VERSION
+    
+    def check_schema_compatibility(self, record: Dict[str, Any]) -> Dict[str, Any]:
+        metadata = record.get('metadata', {})
+        record_version = metadata.get('schema_version', 0)
+        
+        compatibility = {
+            'current_schema_version': self.SCHEMA_VERSION,
+            'record_schema_version': record_version,
+            'is_compatible': record_version == self.SCHEMA_VERSION,
+            'needs_migration': record_version < self.SCHEMA_VERSION,
+            'is_future_version': record_version > self.SCHEMA_VERSION
+        }
+        
+        if compatibility['needs_migration']:
+            compatibility['migration_path'] = self._get_migration_path(record_version, self.SCHEMA_VERSION)
+        
+        return compatibility
+    
+    def _get_migration_path(self, from_version: int, to_version: int) -> List[int]:
+        return list(range(from_version + 1, to_version + 1))
+    
+    def migrate_record(self, record: Dict[str, Any], target_version: int = None) -> Dict[str, Any]:
+        if target_version is None:
+            target_version = self.SCHEMA_VERSION
+        
+        metadata = record.get('metadata', {})
+        current_version = metadata.get('schema_version', 0)
+        
+        if current_version == target_version:
+            return record
+        
+        # Apply migrations in sequence
+        migrated_record = record.copy()
+        for version in self._get_migration_path(current_version, target_version):
+            migrated_record = self._apply_migration(migrated_record, version)
+        
+        return migrated_record
+    
+    def _apply_migration(self, record: Dict[str, Any], target_version: int) -> Dict[str, Any]:
+        if 'metadata' not in record:
+            record['metadata'] = {}
+        
+        record['metadata']['schema_version'] = target_version
+        record['metadata']['migrated_at'] = datetime.now().isoformat()
+        
+        return record

@@ -130,6 +130,96 @@ Run the test suite to verify everything is working:
 python scripts/test_api.py
 ```
 
+## Query Logging System
+
+The API automatically logs all search queries with structured data for monitoring, analytics, and debugging purposes.
+
+### Log Format
+
+Each log entry is stored as a JSON object with the following structure:
+
+```json
+{
+  "timestamp": "2024-01-15T10:30:45.123456",
+  "query_text": "commercial remodel downtown",
+  "filters": {
+    "permit_class": "Commercial",
+    "calendar_year_issued": 2023
+  },
+  "top_results": [
+    {
+      "record_id": "PERMIT_123_PROJECT_456",
+      "similarity_score": 0.85,
+      "permit_number": "2023-123456",
+      "address": "123 Main St, Austin, TX",
+      "permit_type": "Commercial Remodel",
+      "status": "Issued",
+      "total_job_valuation": 50000,
+      "calendar_year_issued": 2023
+    }
+  ],
+  "search_time_ms": 245.67,
+  "user_agent": "Mozilla/5.0...",
+  "client_ip": "192.168.1.100",
+  "total_results": 5
+}
+```
+
+### Log Storage
+
+- **Format**: JSONL (JSON Lines) file
+- **Location**: `logs/search_queries.jsonl`
+- **Rotation**: Automatic file creation with timestamps
+- **Retention**: Configurable (default: unlimited)
+
+### Log Endpoints
+
+| Endpoint | Method | Description | Parameters |
+|----------|--------|-------------|------------|
+| `/api/v1/logs/recent` | GET | Get recent search logs | `limit` (default: 25, max: 100) |
+
+## API Versioning
+
+The API uses semantic versioning with the following approach:
+
+### Version Structure
+
+- **Current Version**: `v1`
+- **Base Path**: `/api/v1/`
+- **Future Versions**: `v2`, `v3`, etc.
+
+### Versioning Strategy
+
+1. **Backward Compatibility**: New versions maintain backward compatibility where possible
+2. **Deprecation Policy**: Deprecated features are announced with advance notice
+3. **Migration Path**: Clear migration guides for breaking changes
+4. **Parallel Support**: Multiple versions can run simultaneously during transitions
+
+### Version Upgrade Process
+
+To upgrade from `v1` to `v2`:
+
+1. **Update Configuration**: Modify `app/api_config/api_version.py`
+2. **Test Compatibility**: Run migration tests
+3. **Deploy Gradually**: Use feature flags for gradual rollout
+4. **Monitor Performance**: Track API usage and performance metrics
+
+### Example Version Configuration
+
+```python
+# Current v1 configuration
+API_VERSION = "v1"
+API_BASE_PATH = "/api/v1"
+SEARCH_ROUTER_PREFIX = "/api/v1"
+LOGS_ROUTER_PREFIX = "/api/v1/logs"
+
+# Future v2 configuration
+API_VERSION = "v2"
+API_BASE_PATH = "/api/v2"
+SEARCH_ROUTER_PREFIX = "/api/v2"
+LOGS_ROUTER_PREFIX = "/api/v2/logs"
+```
+
 ## API Endpoints
 
 | Endpoint | Method | Description |
@@ -137,6 +227,42 @@ python scripts/test_api.py
 | `/` | GET | Health check |
 | `/health` | GET | Detailed service status |
 | `/api/v1/search` | POST | Search permits with filters |
+| `/api/v1/logs/recent` | GET | Get recent search logs |
+
+## Data Schema Versioning
+
+The system includes comprehensive schema versioning for normalized permit records to ensure data compatibility and enable future migrations.
+
+### Schema Version Structure
+
+Each normalized permit record includes metadata with schema version information:
+
+```json
+{
+  "metadata": {
+    "schema_version": 1,
+    "processing_timestamp": "2024-01-15T10:30:45.123456",
+    "data_source": "Austin Texas Government API",
+    "record_id": "PERMIT_123_PROJECT_456",
+    "raw_field_count": 45
+  }
+}
+```
+
+### Schema Version Management
+
+- **Current Version**: `1`
+- **Version Location**: `app/utils/data_processor.py` - `SCHEMA_VERSION` constant
+- **Migration Support**: Built-in migration utilities for future schema changes
+
+### Migration Process
+
+When schema changes are needed:
+
+1. **Increment Version**: Update `SCHEMA_VERSION` in `PermitDataProcessor`
+2. **Implement Migration**: Add migration logic in `_apply_migration()` method
+3. **Test Migration**: Use `migrate_record()` method to test migrations
+4. **Batch Migration**: Process existing data with new schema
 
 ## Development
 
@@ -147,6 +273,9 @@ ConstructIQ/
 ├── app/
 │   ├── main.py              # FastAPI application entry point
 │   ├── config.py            # Application configuration
+│   ├── api_config/          # API versioning configuration
+│   │   ├── __init__.py
+│   │   └── api_version.py   # API version constants
 │   ├── models/              # Pydantic models
 │   │   ├── __init__.py
 │   │   ├── search.py        # Search request/response models
@@ -154,22 +283,28 @@ ConstructIQ/
 │   ├── api/                 # API routes
 │   │   ├── __init__.py
 │   │   ├── search.py        # Search endpoints
-│   │   └── health.py        # Health check endpoints
+│   │   ├── health.py        # Health check endpoints
+│   │   └── logs.py          # Query logging endpoints
 │   ├── services/            # Business logic
 │   │   ├── __init__.py
 │   │   ├── permit.py        # Main permit service
 │   │   ├── embedding.py     # OpenAI embedding service
-│   │   └── vector_db.py     # Pinecone vector database service
+│   │   ├── vector_db.py     # Pinecone vector database service
+│   │   └── logging_service.py # Query logging service
 │   └── utils/               # Utilities
 │       ├── __init__.py
 │       └── data_processor.py # Data processing utilities
 ├── data/
 │   ├── raw/                 # Raw permit data
 │   └── processed/           # Processed permit data
+├── logs/                    # Query log files
+│   └── search_queries.jsonl # Structured query logs
 ├── scripts/
 │   ├── create_embeddings.py # Data indexing script
 │   ├── example_search.py    # Search examples
-│   └── test_api.py          # API test suite
+│   ├── test_api.py          # API test suite
+│   ├── process_data.py      # Data processing script
+│   └── load_data.py         # Data loading utilities
 ├── requirements.txt         # Python dependencies
 └── README.md               # This file
 ```

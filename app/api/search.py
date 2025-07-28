@@ -1,13 +1,15 @@
-from fastapi import APIRouter, HTTPException, Depends
+from fastapi import APIRouter, HTTPException, Depends, Request
 import time
 import logging
 
 from ..models.search import SearchRequest, SearchResponse, SearchResult
 from ..services.permit import PermitService
+from ..services.logging_service import QueryLoggingService
+from ..api_config.api_version import SEARCH_ROUTER_PREFIX
 
 logger = logging.getLogger(__name__)
 
-router = APIRouter(prefix="/api/v1", tags=["search"])
+router = APIRouter(prefix=SEARCH_ROUTER_PREFIX, tags=["search"])
 
 def get_permit_service() -> PermitService:
     from ..main import permit_service
@@ -15,11 +17,16 @@ def get_permit_service() -> PermitService:
         raise HTTPException(status_code=503, detail="Permit service not available")
     return permit_service
 
+def get_logging_service() -> QueryLoggingService:
+    return QueryLoggingService()
+
 
 @router.post("/search", response_model=SearchResponse)
 async def search_permits(
     request: SearchRequest,
-    permit_service: PermitService = Depends(get_permit_service)
+    http_request: Request,
+    permit_service: PermitService = Depends(get_permit_service),
+    logging_service: QueryLoggingService = Depends(get_logging_service)
 ):
     start_time = time.time()
     
@@ -65,6 +72,24 @@ async def search_permits(
             search_results.append(search_result)
         
         search_time = (time.time() - start_time) * 1000
+        
+        # Log the search query
+        try:
+            # Get client information
+            client_ip = http_request.client.host if http_request.client else None
+            user_agent = http_request.headers.get("user-agent")
+            
+            # Log the query
+            logging_service.log_query(
+                query_text=request.query,
+                filters=request.filters.dict(exclude_none=True) if request.filters else None,
+                top_results=results,
+                search_time_ms=round(search_time, 2),
+                user_agent=user_agent,
+                client_ip=client_ip
+            )
+        except Exception as e:
+            logger.error(f"Failed to log search query: {e}")
         
         return SearchResponse(
             query=request.query,
