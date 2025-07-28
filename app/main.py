@@ -4,7 +4,7 @@ import logging
 from dotenv import load_dotenv
 from .config import settings
 from .services.permit import PermitService
-from .api import search_router, health_router
+from .api import search_router, health_router, logs_router
 
 # Load environment variables
 load_dotenv()
@@ -38,6 +38,7 @@ def create_app() -> FastAPI:
     # Include routers
     app.include_router(health_router)
     app.include_router(search_router)
+    app.include_router(logs_router)
     
     return app
 

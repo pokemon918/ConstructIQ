@@ -3,10 +3,11 @@ import logging
 
 from ..models.common import HealthResponse, RootResponse
 from ..services.permit import PermitService
+from ..api_config.api_version import HEALTH_ROUTER_PREFIX
 
 logger = logging.getLogger(__name__)
 
-router = APIRouter(tags=["health"])
+router = APIRouter(prefix=HEALTH_ROUTER_PREFIX, tags=["health"])
 
 
 def get_permit_service() -> PermitService:
